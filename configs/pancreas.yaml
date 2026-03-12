@@ -1,0 +1,80 @@
+# Pancreas system configuration
+# Endocrine progenitor fate decision: alpha vs beta vs delta cells
+# GSE132188: Bastidas-Ponce et al. 2019 - E15.5 mouse pancreas
+# Example: Arx-KO converts alpha to beta fate
+
+system:
+  name: "pancreas"
+  condition_key: "genotype"
+  conditions:
+    WT: 0
+    Arx-KO: 1
+  fate_names:
+    - "uncommitted"
+    - "beta"
+    - "alpha"
+    - "delta"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Ins1"
+    - "Ins2"
+    - "Gcg"
+    - "Sst"
+    - "Ppy"
+    - "Arx"
+    - "Pax4"
+  known_markers:
+    beta:
+      - "Ins1"
+      - "Ins2"
+      - "Nkx6-1"
+      - "Pdx1"
+      - "Mafa"
+    alpha:
+      - "Gcg"
+      - "Arx"
+      - "Irx1"
+      - "Irx2"
+    delta:
+      - "Sst"
+      - "Hhex"
+  sample_condition_map: {}
+  root_cluster: "Ngn3_prog"
+  cluster_key: "cluster"
+  geo_accession: "GSE132188"
+  download_function: "prism.data.download_pancreas.download_pancreas"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_endocrine"
+    - "undetermined"
+    - "beta"
+    - "alpha"
+    - "delta"
+  marker_scores:
+    endocrine_prog:
+      - "Neurog3"
+      - "Neurod1"
+    beta:
+      - "Ins1"
+      - "Ins2"
+      - "Nkx6-1"
+      - "Pdx1"
+    alpha:
+      - "Gcg"
+      - "Arx"
+      - "Irx1"
+    delta:
+      - "Sst"
+      - "Hhex"
+    ductal:
+      - "Krt19"
+      - "Sox9"
+    acinar:
+      - "Amy2a"
+      - "Ptf1a"
+  branch_names:
+    branch_a: "beta_branch"
+    branch_b: "alpha_branch"
+  condition_branch_map:
+    WT: "alpha_branch"
+    Arx-KO: "beta_branch"

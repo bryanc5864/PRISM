@@ -1,0 +1,71 @@
+# Cortex system configuration
+# Cortical neuron fate decision: deep-layer vs upper-layer projection neurons
+# GSE153164: Di Bella et al. 2021 - Mouse cortical development
+# Temporal regulation of progenitor competence
+
+system:
+  name: "cortex"
+  condition_key: "stage"
+  conditions:
+    E12.5: 0
+    E14.5: 1
+    E16.5: 2
+  fate_names:
+    - "uncommitted"
+    - "deep_layer"
+    - "upper_layer"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Tbr1"
+    - "Satb2"
+    - "Fezf2"
+    - "Ctip2"
+    - "Cux1"
+    - "Cux2"
+  known_markers:
+    deep_layer:
+      - "Tbr1"
+      - "Fezf2"
+      - "Ctip2"
+      - "Sox5"
+    upper_layer:
+      - "Satb2"
+      - "Cux1"
+      - "Cux2"
+      - "Brn2"
+  sample_condition_map: {}
+  root_cluster: "RGC"
+  cluster_key: "cluster"
+  geo_accession: "GSE153164"
+  download_function: "prism.data.download_cortex.download_cortex"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_neuronal"
+    - "undetermined"
+    - "deep_layer"
+    - "upper_layer"
+  marker_scores:
+    rgc:
+      - "Pax6"
+      - "Sox2"
+      - "Nes"
+    ipc:
+      - "Tbr2"
+      - "Neurog2"
+    deep_layer:
+      - "Tbr1"
+      - "Fezf2"
+      - "Ctip2"
+    upper_layer:
+      - "Satb2"
+      - "Cux1"
+      - "Cux2"
+    interneuron:
+      - "Dlx2"
+      - "Gad1"
+  branch_names:
+    branch_a: "deep_layer_branch"
+    branch_b: "upper_layer_branch"
+  condition_branch_map:
+    E12.5: "deep_layer_branch"
+    E16.5: "upper_layer_branch"

@@ -1,0 +1,84 @@
+# Neural crest system configuration
+# Neural crest fate decision: melanocyte vs Schwann cell (glial) lineage
+# GSE129114: Soldatov et al. 2019 (Nature) - Mouse trunk neural crest scRNA-seq
+# "Spatio-temporal structure of cell fate decisions in murine neural crest"
+# Sox10 marks both; Mitf drives melanocyte, Erbb3/Mbp drive Schwann fate
+# Smart-seq2, 6,124 cells across E8.5-E10.5
+
+system:
+  name: "neural_crest"
+  condition_key: "stage"
+  conditions:
+    E8.5: 0
+    E9.5: 1
+    E10.5: 2
+  fate_names:
+    - "uncommitted"
+    - "melanocyte"
+    - "schwann"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Mitf"
+    - "Sox10"
+    - "Erbb3"
+    - "Mbp"
+    - "Dct"
+    - "Pmel"
+    - "Mpz"
+  known_markers:
+    melanocyte:
+      - "Mitf"
+      - "Dct"
+      - "Pmel"
+      - "Tyr"
+      - "Tyrp1"
+    schwann:
+      - "Sox10"
+      - "Erbb3"
+      - "Mbp"
+      - "Mpz"
+      - "Dhh"
+  sample_condition_map: {}
+  root_cluster: "neural_crest_prog"
+  cluster_key: "cluster"
+  geo_accession: "GSE129114"
+  download_function: "prism.data.download_neural_crest.download_neural_crest"
+  max_genes: 15000
+  label_strategy: "flat"
+  fate_categories:
+    - "non_neural_crest"
+    - "undetermined"
+    - "melanocyte"
+    - "schwann"
+  marker_scores:
+    neural_crest:
+      - "Sox10"
+      - "Foxd3"
+      - "Sox9"
+    delaminating:
+      - "Snai1"
+      - "Snai2"
+      - "Twist1"
+    melanocyte:
+      - "Mitf"
+      - "Dct"
+      - "Pmel"
+      - "Tyr"
+    schwann:
+      - "Erbb3"
+      - "Mbp"
+      - "Mpz"
+    sensory:
+      - "Isl1"
+      - "Brn3a"
+      - "Ntrk1"
+    autonomic:
+      - "Phox2b"
+      - "Hand2"
+      - "Ascl1"
+  branch_names:
+    branch_a: "melanocyte_branch"
+    branch_b: "schwann_branch"
+  condition_branch_map:
+    E8.5: "melanocyte_branch"
+    E10.5: "schwann_branch"

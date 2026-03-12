@@ -1,0 +1,90 @@
+# Skin system configuration (Dingwall et al., Dev Cell 2024)
+# P2.5 mouse volar hindpaw skin - eccrine gland vs hair follicle fate decision
+
+system:
+  name: "skin"
+  condition_key: "genotype"
+  conditions:
+    WT: 0
+    En1-cKO: 1
+  fate_names:
+    - "uncommitted"
+    - "eccrine"
+    - "hair"
+  known_fate_threshold: 2
+  forced_genes:
+    - "En1"
+    - "Trpv6"
+    - "Dkk4"
+    - "Lgr6"
+    - "S100a4"
+    - "Foxi1"
+    - "Defb6"
+  known_markers:
+    eccrine:
+      - "En1"
+      - "Trpv6"
+      - "Dkk4"
+      - "Foxi1"
+      - "Defb6"
+    hair:
+      - "Lhx2"
+      - "Sox9"
+      - "Wnt10b"
+      - "Shh"
+      - "Edar"
+  sample_condition_map:
+    GSM6833478: "WT"
+    GSM6833479: "WT"
+    GSM6833480: "WT"
+    GSM6833481: "WT"
+    GSM6833482: "En1-cKO"
+    GSM6833483: "En1-cKO"
+  root_cluster: "Epi0"
+  cluster_key: "cluster"
+  geo_accession: "GSE220977"
+  download_function: "prism.data.download.download_gse220977"
+  label_strategy: "hierarchical"
+  fate_categories:
+    - "non_appendage"
+    - "undetermined"
+    - "eccrine"
+    - "hair"
+  marker_scores:
+    basal:
+      - "Krt14"
+      - "Krt5"
+      - "Tp63"
+    diff:
+      - "Krt1"
+      - "Krt10"
+      - "Ivl"
+      - "Lor"
+    appendage:
+      - "Edar"
+      - "Ctnnb1"
+      - "Lef1"
+      - "Wnt10b"
+    eccrine:
+      - "En1"
+      - "Lgr6"
+      - "Dkk4"
+      - "Wif1"
+      - "Sfrp1"
+    hair:
+      - "Lhx2"
+      - "Sox9"
+      - "Shh"
+    dermal:
+      - "Col1a1"
+      - "Col3a1"
+      - "Pdgfra"
+      - "Dcn"
+    eden:
+      - "S100a4"
+  branch_names:
+    branch_a: "eccrine_branch"
+    branch_b: "hair_branch"
+  condition_branch_map:
+    WT: "eccrine_branch"
+    En1-cKO: "hair_branch"

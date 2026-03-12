@@ -1,0 +1,81 @@
+# Cardiac progenitor system configuration
+# Cardiac progenitor fate decision: first heart field (FHF) vs second heart field (SHF)
+# GSE126128: de Soysa et al. 2019 - Mouse cardiac development scRNA-seq
+# Isl1 marks SHF; Tbx5/Hcn4 mark FHF progenitors
+
+system:
+  name: "cardiac"
+  condition_key: "library"
+  conditions:
+    "1": 0
+    "2": 1
+    "3": 2
+    "4": 3
+    "5": 4
+    "6": 5
+    "7": 6
+    "8": 7
+    "9": 8
+  fate_names:
+    - "uncommitted"
+    - "FHF"
+    - "SHF"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Tbx5"
+    - "Isl1"
+    - "Hand2"
+    - "Mef2c"
+    - "Nkx2-5"
+    - "Hcn4"
+    - "Fgf10"
+  known_markers:
+    FHF:
+      - "Tbx5"
+      - "Hcn4"
+      - "Nkx2-5"
+      - "Hand1"
+    SHF:
+      - "Isl1"
+      - "Hand2"
+      - "Mef2c"
+      - "Fgf10"
+  sample_condition_map: {}
+  root_cluster: "cardiac_prog"
+  cluster_key: "cluster"
+  geo_accession: "GSE126128"
+  download_function: "prism.data.download_cardiac.download_cardiac"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_cardiac"
+    - "undetermined"
+    - "FHF"
+    - "SHF"
+  marker_scores:
+    cardiac_mesoderm:
+      - "Mesp1"
+      - "Mesp2"
+    cardiac_prog:
+      - "Nkx2-5"
+      - "Gata4"
+    FHF:
+      - "Tbx5"
+      - "Hcn4"
+      - "Hand1"
+    SHF:
+      - "Isl1"
+      - "Hand2"
+      - "Mef2c"
+      - "Fgf10"
+    endothelial:
+      - "Pecam1"
+      - "Cdh5"
+    endocardial:
+      - "Nfatc1"
+      - "Emcn"
+  branch_names:
+    branch_a: "FHF_branch"
+    branch_b: "SHF_branch"
+  condition_branch_map:
+    "1": "FHF_branch"
+    "9": "SHF_branch"

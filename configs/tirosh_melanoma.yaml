@@ -1,0 +1,95 @@
+# Tirosh melanoma system configuration
+# Cancer stem cell fate decision: stemlike vs differentiated malignant states
+# GSE72056: Tirosh et al. 2016 - Human melanoma Smart-seq2 scRNA-seq
+# ~4,645 cells from 19 patients; filter to malignant cells only
+
+system:
+  name: "tirosh_melanoma"
+  condition_key: "tumor"
+  conditions:
+    Mel53: 0
+    Mel58: 1
+    Mel59: 2
+    Mel60: 3
+    Mel65: 4
+    Mel67: 5
+    Mel68: 6
+    Mel69: 7
+    Mel70: 8
+    Mel71: 9
+    Mel72: 10
+    Mel73: 11
+    Mel74: 12
+    Mel75: 13
+    Mel76: 14
+    Mel77: 15
+    Mel78: 16
+    Mel79: 17
+    Mel80: 18
+  fate_names:
+    - "uncommitted"
+    - "malignant_stemlike"
+    - "malignant_differentiated"
+  known_fate_threshold: 2
+  forced_genes:
+    - "AXL"
+    - "NGFR"
+    - "MITF"
+    - "DCT"
+    - "TYR"
+    - "MLANA"
+    - "SERPINE2"
+    - "EGFR"
+  known_markers:
+    malignant_stemlike:
+      - "AXL"
+      - "NGFR"
+      - "SERPINE2"
+      - "EGFR"
+    malignant_differentiated:
+      - "MITF"
+      - "DCT"
+      - "PMEL"
+      - "TYR"
+      - "MLANA"
+  sample_condition_map: {}
+  root_cluster: "malignant_progenitor"
+  cluster_key: "cluster"
+  geo_accession: "GSE72056"
+  download_function: "prism.data.download_tirosh_melanoma.download_tirosh_melanoma"
+  label_strategy: "flat"
+  max_genes: 12000
+  fate_categories:
+    - "non_malignant"
+    - "undetermined"
+    - "malignant_stemlike"
+    - "malignant_differentiated"
+  marker_scores:
+    malignant_stemlike:
+      - "AXL"
+      - "NGFR"
+      - "SERPINE2"
+      - "EGFR"
+    malignant_differentiated:
+      - "MITF"
+      - "DCT"
+      - "PMEL"
+      - "TYR"
+      - "MLANA"
+    immune:
+      - "CD3D"
+      - "CD8A"
+      - "CD14"
+      - "PTPRC"
+    stromal:
+      - "COL1A1"
+      - "PECAM1"
+      - "FAP"
+    proliferating:
+      - "MKI67"
+      - "TOP2A"
+      - "CDK1"
+  branch_names:
+    branch_a: "stemlike_branch"
+    branch_b: "differentiated_branch"
+  condition_branch_map: {}

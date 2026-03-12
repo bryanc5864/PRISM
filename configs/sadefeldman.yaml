@@ -1,0 +1,91 @@
+# Sade-Feldman et al. 2018 — T cell exhaustion system configuration
+# CD8+ T cell fate decision: progenitor exhausted vs terminally exhausted
+# GSE120575: Sade-Feldman et al. 2018 - Human melanoma tumor-infiltrating immune cells
+# ~16,000 cells, pre/post anti-PD-1 immunotherapy
+# NOTE: HUMAN data - gene names are uppercase (e.g., TCF7, LAG3, HAVCR2)
+
+system:
+  name: "sadefeldman"
+  condition_key: "response"
+  conditions:
+    responder: 0
+    non_responder: 1
+  fate_names:
+    - "uncommitted"
+    - "progenitor_exhausted"
+    - "terminally_exhausted"
+  known_fate_threshold: 2
+  max_genes: 12000
+  forced_genes:
+    - "TCF7"
+    - "SLAMF6"
+    - "IL7R"
+    - "CCR7"
+    - "HAVCR2"
+    - "ENTPD1"
+    - "LAG3"
+    - "TIGIT"
+    - "PDCD1"
+    - "TOX"
+  known_markers:
+    progenitor_exhausted:
+      - "TCF7"
+      - "SLAMF6"
+      - "IL7R"
+      - "CCR7"
+    terminally_exhausted:
+      - "HAVCR2"
+      - "ENTPD1"
+      - "LAG3"
+      - "TIGIT"
+  sample_condition_map: {}
+  root_cluster: "CD8_T"
+  cluster_key: "cluster"
+  geo_accession: "GSE120575"
+  download_function: "prism.data.download_sadefeldman.download_sadefeldman"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_cd8"
+    - "undetermined"
+    - "progenitor_exhausted"
+    - "terminally_exhausted"
+  marker_scores:
+    cd8_t:
+      - "CD8A"
+      - "CD8B"
+      - "CD3E"
+    cd4_t:
+      - "CD4"
+      - "FOXP3"
+    progenitor_exhausted:
+      - "TCF7"
+      - "SLAMF6"
+      - "IL7R"
+      - "CCR7"
+    terminally_exhausted:
+      - "HAVCR2"
+      - "ENTPD1"
+      - "LAG3"
+      - "TIGIT"
+    effector:
+      - "GZMB"
+      - "PRF1"
+      - "IFNG"
+    nk:
+      - "NCAM1"
+      - "KLRD1"
+      - "NKG7"
+    b_cell:
+      - "CD19"
+      - "MS4A1"
+      - "CD79A"
+    myeloid:
+      - "CD14"
+      - "FCGR3A"
+      - "CD68"
+  branch_names:
+    branch_a: "progenitor_exhausted_branch"
+    branch_b: "terminally_exhausted_branch"
+  condition_branch_map:
+    responder: "progenitor_exhausted_branch"
+    non_responder: "terminally_exhausted_branch"

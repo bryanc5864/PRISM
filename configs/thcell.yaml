@@ -1,0 +1,82 @@
+# T helper cell system configuration
+# Gut CD4+ T cell fate decision: Th1 vs Th17 effector differentiation
+# GSE160055: Kiner et al. 2021 (Nature Immunology)
+# "Gut CD4+ T cell phenotypes are a continuum molded by microbes"
+# Mouse colon lamina propria CD4+ T cells under microbial colonization
+# 10X Chromium, multiple infection/colonization conditions
+
+system:
+  name: "thcell"
+  condition_key: "condition"
+  conditions:
+    GF-V1: 0
+    SPF-V1: 1
+    SPF: 2
+    Citrobacter: 3
+    Salmonella: 4
+    Nippo: 5
+    GEX-Hash-all_infections: 6
+    GEX-Timecourse-Salmonella: 7
+  fate_names:
+    - "uncommitted"
+    - "Th1"
+    - "Th17"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Tbx21"
+    - "Rorc"
+    - "Ifng"
+    - "Il17a"
+    - "Il22"
+    - "Cxcr3"
+  known_markers:
+    Th1:
+      - "Tbx21"
+      - "Ifng"
+      - "Cxcr3"
+      - "Stat4"
+      - "Cxcr6"
+    Th17:
+      - "Rorc"
+      - "Il17a"
+      - "Il22"
+      - "Ccr6"
+      - "Il23r"
+  sample_condition_map: {}
+  root_cluster: "naive_CD4"
+  cluster_key: "cluster"
+  geo_accession: "GSE160055"
+  download_function: "prism.data.download_thcell.download_thcell"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_tcell"
+    - "undetermined"
+    - "Th1"
+    - "Th17"
+  marker_scores:
+    naive:
+      - "Sell"
+      - "Ccr7"
+      - "Lef1"
+    activated:
+      - "Cd44"
+      - "Il2ra"
+      - "Cd69"
+    Th1:
+      - "Tbx21"
+      - "Ifng"
+      - "Cxcr3"
+    Th17:
+      - "Rorc"
+      - "Il17a"
+      - "Il22"
+    Treg:
+      - "Foxp3"
+      - "Il2ra"
+      - "Ctla4"
+  branch_names:
+    branch_a: "Th1_branch"
+    branch_b: "Th17_branch"
+  condition_branch_map:
+    GF-V1: "Th1_branch"
+    Salmonella: "Th17_branch"

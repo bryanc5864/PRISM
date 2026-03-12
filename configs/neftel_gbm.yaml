@@ -1,0 +1,128 @@
+# Neftel glioblastoma system configuration
+# Cancer stem cell fate decision: 4 GBM meta-programs (MES, AC, OPC, NPC)
+# GSE131928: Neftel et al. 2019 - Human glioblastoma Smart-seq2 + 10X scRNA-seq
+# ~7,930 cells (Smart-seq2) from 28 patients; filter to malignant cells only
+
+system:
+  name: "neftel_gbm"
+  condition_key: "tumor"
+  conditions:
+    MGH101: 0
+    MGH102: 1
+    MGH103: 2
+    MGH104: 3
+    MGH105: 4
+    MGH106: 5
+    MGH107: 6
+    MGH108: 7
+    MGH109: 8
+    MGH110: 9
+    MGH111: 10
+    MGH112: 11
+    MGH113: 12
+    MGH114: 13
+    MGH115: 14
+    MGH116: 15
+    MGH117: 16
+    MGH118: 17
+    MGH119: 18
+    MGH120: 19
+    MGH121: 20
+    MGH122: 21
+    MGH123: 22
+    MGH124: 23
+    MGH125: 24
+    MGH126: 25
+    MGH127: 26
+    MGH128: 27
+  fate_names:
+    - "uncommitted"
+    - "MES"
+    - "AC"
+    - "OPC"
+    - "NPC"
+  known_fate_threshold: 2
+  forced_genes:
+    - "CHI3L1"
+    - "VIM"
+    - "CD44"
+    - "GFAP"
+    - "OLIG1"
+    - "OLIG2"
+    - "SOX4"
+    - "SOX11"
+    - "DCX"
+    - "PDGFRA"
+  known_markers:
+    MES:
+      - "CHI3L1"
+      - "VIM"
+      - "CD44"
+      - "TGFBI"
+    AC:
+      - "GFAP"
+      - "AQP4"
+      - "APOE"
+      - "AGT"
+    OPC:
+      - "OLIG1"
+      - "OLIG2"
+      - "PDGFRA"
+      - "SOX10"
+    NPC:
+      - "SOX4"
+      - "SOX11"
+      - "DCX"
+      - "STMN2"
+  sample_condition_map: {}
+  root_cluster: "GBM_progenitor"
+  cluster_key: "cluster"
+  geo_accession: "GSE131928"
+  download_function: "prism.data.download_neftel_gbm.download_neftel_gbm"
+  label_strategy: "flat"
+  max_genes: 12000
+  fate_categories:
+    - "non_malignant"
+    - "undetermined"
+    - "MES"
+    - "AC"
+    - "OPC"
+    - "NPC"
+  marker_scores:
+    MES:
+      - "CHI3L1"
+      - "VIM"
+      - "CD44"
+      - "TGFBI"
+    AC:
+      - "GFAP"
+      - "AQP4"
+      - "APOE"
+      - "AGT"
+    OPC:
+      - "OLIG1"
+      - "OLIG2"
+      - "PDGFRA"
+      - "SOX10"
+    NPC:
+      - "SOX4"
+      - "SOX11"
+      - "DCX"
+      - "STMN2"
+    immune:
+      - "CD3D"
+      - "CD14"
+      - "CD68"
+      - "PTPRC"
+    oligodendrocyte:
+      - "MOG"
+      - "PLP1"
+      - "MAG"
+    proliferating:
+      - "MKI67"
+      - "TOP2A"
+      - "CDK1"
+  branch_names:
+    branch_a: "MES_branch"
+    branch_b: "NPC_branch"
+  condition_branch_map: {}

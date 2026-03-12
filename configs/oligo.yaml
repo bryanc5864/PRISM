@@ -1,0 +1,83 @@
+# Oligodendrocyte system configuration
+# Oligodendrocyte fate decision: OPC maintenance vs myelinating differentiation
+# GSE75330: Marques et al. 2016 - Mouse oligodendrocyte lineage scRNA-seq
+# Pdgfra+ OPCs differentiate into myelinating oligodendrocytes
+
+system:
+  name: "oligo"
+  condition_key: "plate"
+  conditions:
+    "1772099": 0
+    "1772096": 1
+    "1772117": 2
+    "1772092": 3
+    "1771051": 4
+    "1772089": 5
+  fate_names:
+    - "uncommitted"
+    - "OPC"
+    - "myelinating"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Pdgfra"
+    - "Mbp"
+    - "Plp1"
+    - "Mog"
+    - "Cspg4"
+    - "Sox6"
+    - "Mag"
+  known_markers:
+    OPC:
+      - "Pdgfra"
+      - "Cspg4"
+      - "Sox6"
+      - "Olig1"
+    myelinating:
+      - "Mbp"
+      - "Plp1"
+      - "Mog"
+      - "Mag"
+      - "Cnp"
+  sample_condition_map: {}
+  root_cluster: "OPC"
+  cluster_key: "cluster"
+  geo_accession: "GSE75330"
+  download_function: "prism.data.download_oligo.download_oligo"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_oligo"
+    - "undetermined"
+    - "OPC"
+    - "myelinating"
+  marker_scores:
+    opc:
+      - "Pdgfra"
+      - "Cspg4"
+      - "Sox6"
+    copi:
+      - "Enpp6"
+      - "Gpr17"
+      - "Tcf7l2"
+    mfol:
+      - "Mal"
+      - "Mog"
+      - "Opalin"
+    myelinating:
+      - "Mbp"
+      - "Plp1"
+      - "Mog"
+      - "Mag"
+    astrocyte:
+      - "Gfap"
+      - "Aqp4"
+      - "Aldh1l1"
+    neuron:
+      - "Rbfox3"
+      - "Snap25"
+      - "Syt1"
+  branch_names:
+    branch_a: "OPC_branch"
+    branch_b: "myelinating_branch"
+  condition_branch_map:
+    "1772099": "OPC_branch"
+    "1772096": "myelinating_branch"

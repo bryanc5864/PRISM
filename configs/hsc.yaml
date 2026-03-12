@@ -1,0 +1,94 @@
+# HSC (Hematopoietic Stem Cell) system configuration
+# Multipotent progenitor fate decision: erythroid vs myeloid vs lymphoid
+# GSE140802: Weinreb et al. 2020 - Mouse hematopoietic progenitor differentiation
+# Example: Gata1-KO blocks erythroid differentiation
+
+system:
+  name: "hsc"
+  condition_key: "genotype"
+  conditions:
+    WT: 0
+    Gata1-KO: 1
+  fate_names:
+    - "uncommitted"
+    - "erythroid"
+    - "myeloid"
+    - "lymphoid"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Gata1"
+    - "Cebpa"
+    - "Pax5"
+    - "Spi1"
+    - "Klf1"
+    - "Epor"
+  known_markers:
+    erythroid:
+      - "Gata1"
+      - "Klf1"
+      - "Epor"
+      - "Hba-a1"
+      - "Gypa"
+    myeloid:
+      - "Cebpa"
+      - "Spi1"
+      - "Csf1r"
+      - "Mpo"
+    b_cell:
+      - "Pax5"
+      - "Ebf1"
+      - "Cd79a"
+      - "Cd19"
+  sample_condition_map: {}
+  root_cluster: "HSC"
+  cluster_key: "cluster"
+  geo_accession: "GSE140802"
+  download_function: "prism.data.download_hsc.download_hsc"
+  label_strategy: "annotation"
+  annotation_key: "cell_type_annotation"
+  annotation_fate_map:
+    Ery: "erythroid"
+    Mk: "erythroid"
+    Bas: "erythroid"
+    Neu: "myeloid"
+    Mono: "myeloid"
+    DC: "myeloid"
+    Baso: "myeloid"
+    Mast: "myeloid"
+    B: "lymphoid"
+    NK: "lymphoid"
+    T: "lymphoid"
+    Undifferentiated: "undetermined"
+    undiff: "undetermined"
+  fate_categories:
+    - "non_hematopoietic"
+    - "undetermined"
+    - "erythroid"
+    - "myeloid"
+    - "lymphoid"
+  marker_scores:
+    hsc:
+      - "Kit"
+      - "Sca1"
+      - "Cd34"
+    mpp:
+      - "Flt3"
+      - "Cd48"
+    erythroid:
+      - "Gata1"
+      - "Klf1"
+      - "Epor"
+    myeloid:
+      - "Cebpa"
+      - "Spi1"
+      - "Csf1r"
+    b_cell:
+      - "Pax5"
+      - "Ebf1"
+      - "Cd79a"
+  branch_names:
+    branch_a: "erythroid_branch"
+    branch_b: "myeloid_branch"
+  condition_branch_map:
+    WT: "erythroid_branch"
+    Gata1-KO: "myeloid_branch"

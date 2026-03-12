@@ -1,0 +1,92 @@
+# Nestorowa et al. 2016 — HSPC system configuration
+# Hematopoietic stem and progenitor cell fate decision: erythroid vs myeloid vs lymphoid
+# GSE81682: Nestorowa et al. 2016 - Mouse HSPCs scRNA-seq (Smart-seq2)
+# ~1,600 cells, enables cross-dataset transfer with GSE140802 (Weinreb HSC)
+
+system:
+  name: "nestorowa"
+  condition_key: "FACS_gate"
+  conditions:
+    LT-HSC: 0
+    ST-HSC: 1
+    MPP: 2
+    LMPP: 3
+    CMP: 4
+    GMP: 5
+    MEP: 6
+    CLP: 7
+  fate_names:
+    - "uncommitted"
+    - "erythroid"
+    - "myeloid"
+    - "lymphoid"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Gata1"
+    - "Klf1"
+    - "Cebpa"
+    - "Irf8"
+    - "Ebf1"
+    - "Pax5"
+    - "Epor"
+    - "Csf1r"
+    - "Ikzf1"
+  known_markers:
+    erythroid:
+      - "Gata1"
+      - "Klf1"
+      - "Epor"
+    myeloid:
+      - "Cebpa"
+      - "Irf8"
+      - "Csf1r"
+    lymphoid:
+      - "Ebf1"
+      - "Pax5"
+      - "Ikzf1"
+  sample_condition_map: {}
+  root_cluster: "HSC"
+  cluster_key: "cluster"
+  geo_accession: "GSE81682"
+  download_function: "prism.data.download_nestorowa.download_nestorowa"
+  label_strategy: "flat"
+  max_genes: 30000
+  fate_categories:
+    - "non_hematopoietic"
+    - "undetermined"
+    - "erythroid"
+    - "myeloid"
+    - "lymphoid"
+  marker_scores:
+    hsc:
+      - "Kit"
+      - "Sca1"
+      - "Cd34"
+    mpp:
+      - "Flt3"
+      - "Cd48"
+    erythroid:
+      - "Gata1"
+      - "Klf1"
+      - "Epor"
+    myeloid:
+      - "Cebpa"
+      - "Irf8"
+      - "Csf1r"
+    lymphoid:
+      - "Ebf1"
+      - "Pax5"
+      - "Ikzf1"
+    megakaryocyte:
+      - "Itga2b"
+      - "Pf4"
+    b_cell:
+      - "Cd79a"
+      - "Cd19"
+  branch_names:
+    branch_a: "erythroid_branch"
+    branch_b: "myeloid_branch"
+  condition_branch_map:
+    MEP: "erythroid_branch"
+    GMP: "myeloid_branch"
+    CLP: "lymphoid_branch"

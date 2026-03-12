@@ -1,0 +1,85 @@
+# Paul et al. 2015 — Myeloid progenitor system configuration
+# Myeloid progenitor fate decision: MEP vs GMP
+# GSE72857: Paul et al. 2015 - Mouse bone marrow myeloid progenitors (MARS-seq)
+# ~2,730 cells, bifurcation of CMP into MEP and GMP lineages
+
+system:
+  name: "paul"
+  condition_key: "cell_type"
+  conditions:
+    MEP: 0
+    GMP: 1
+    CMP: 2
+  fate_names:
+    - "uncommitted"
+    - "MEP"
+    - "GMP"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Gata1"
+    - "Klf1"
+    - "Cebpa"
+    - "Irf8"
+    - "Mpo"
+    - "Epor"
+    - "Zfpm1"
+    - "Csf1r"
+  known_markers:
+    MEP:
+      - "Gata1"
+      - "Klf1"
+      - "Epor"
+      - "Zfpm1"
+    GMP:
+      - "Cebpa"
+      - "Irf8"
+      - "Csf1r"
+      - "Mpo"
+  sample_condition_map: {}
+  root_cluster: "CMP"
+  cluster_key: "cluster"
+  geo_accession: "GSE72857"
+  download_function: "prism.data.download_paul.download_paul"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_myeloid"
+    - "undetermined"
+    - "MEP"
+    - "GMP"
+  marker_scores:
+    cmp:
+      - "Cd34"
+      - "Kit"
+      - "Flt3"
+    MEP:
+      - "Gata1"
+      - "Klf1"
+      - "Epor"
+      - "Zfpm1"
+    GMP:
+      - "Cebpa"
+      - "Irf8"
+      - "Csf1r"
+      - "Mpo"
+    erythroid:
+      - "Gata1"
+      - "Klf1"
+      - "Hba-a1"
+    megakaryocyte:
+      - "Itga2b"
+      - "Pf4"
+      - "Vwf"
+    granulocyte:
+      - "Elane"
+      - "Mpo"
+      - "Prtn3"
+    monocyte:
+      - "Csf1r"
+      - "Irf8"
+      - "Ly6c2"
+  branch_names:
+    branch_a: "MEP_branch"
+    branch_b: "GMP_branch"
+  condition_branch_map:
+    MEP: "MEP_branch"
+    GMP: "GMP_branch"

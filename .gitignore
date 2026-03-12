@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Data (large files)
+data/raw/
+data/processed/
+*.h5ad
+
+# Model checkpoints (large)
+checkpoints/*.pt
+checkpoints/**/*.pt
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Pre-trained model weights (large)
+/models/
+
+# Large generated outputs
+data/
+checkpoints/
+figures/
+presentation/
+results.md
+PLAN.md

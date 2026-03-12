@@ -1,0 +1,85 @@
+# Lung alveolar system configuration
+# Alveolar progenitor fate decision: AT1 vs AT2 cell types
+# GSE149563: Frank et al. 2019 / Zepp et al. 2021 - Mouse lung development scRNA-seq
+# Bipotent alveolar progenitors differentiate into AT1 (gas exchange) or AT2 (surfactant)
+
+system:
+  name: "lung"
+  condition_key: "timepoint"
+  conditions:
+    E12.5: 0
+    E15.5: 1
+    E17.5: 2
+    P3: 3
+    P7: 4
+    P15: 5
+    P42: 6
+    PedB_2mo_peripheral_rep1: 7
+    PedB_2mo_peripheral_rep2: 8
+  fate_names:
+    - "uncommitted"
+    - "AT1"
+    - "AT2"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Hopx"
+    - "Aqp5"
+    - "Sftpc"
+    - "Abca3"
+    - "Pdpn"
+    - "Sftpb"
+    - "Lamp3"
+  known_markers:
+    AT1:
+      - "Hopx"
+      - "Aqp5"
+      - "Pdpn"
+      - "Ager"
+      - "Cav1"
+    AT2:
+      - "Sftpc"
+      - "Abca3"
+      - "Sftpb"
+      - "Lamp3"
+      - "Sftpd"
+  sample_condition_map: {}
+  root_cluster: "alveolar_prog"
+  cluster_key: "cluster"
+  geo_accession: "GSE149563"
+  download_function: "prism.data.download_lung.download_lung"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_epithelial"
+    - "undetermined"
+    - "AT1"
+    - "AT2"
+  marker_scores:
+    alveolar_prog:
+      - "Sox9"
+      - "Id2"
+      - "Nkx2-1"
+    AT1:
+      - "Hopx"
+      - "Aqp5"
+      - "Pdpn"
+      - "Ager"
+    AT2:
+      - "Sftpc"
+      - "Abca3"
+      - "Sftpb"
+      - "Lamp3"
+    airway:
+      - "Scgb1a1"
+      - "Foxj1"
+    mesenchyme:
+      - "Col1a1"
+      - "Pdgfra"
+    endothelial:
+      - "Pecam1"
+      - "Cdh5"
+  branch_names:
+    branch_a: "AT1_branch"
+    branch_b: "AT2_branch"
+  condition_branch_map:
+    E12.5: "AT1_branch"
+    P42: "AT2_branch"

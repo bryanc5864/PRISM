@@ -1,0 +1,80 @@
+# PRISM Configuration
+# Progenitor Resolution via Invariance-Sensitive Modeling
+
+data:
+  geo_accession: "GSE220977"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  min_genes: 200
+  max_genes: 5000
+  max_mito_pct: 5.0
+  n_hvgs: 2000
+  forced_genes:
+    - "En1"
+    - "Trpv6"
+    - "Dkk4"
+    - "Lgr6"
+    - "S100a4"
+    - "Foxi1"
+    - "Defb6"
+  train_frac: 0.8
+  val_frac: 0.1
+  test_frac: 0.1
+
+encoder:
+  n_layers: 12
+  n_heads: 8
+  d_model: 512
+  d_ff: 512
+  d_output: 256
+  n_genes: 2000
+  n_expression_bins: 51  # 0-50 rank bins
+  dropout: 0.1
+  lora_rank: 8
+  lora_alpha: 16
+  lora_dropout: 0.1
+
+contrastive:
+  temperature_init: 0.07
+  alpha_max: 2.0
+  curriculum_warmup_epochs: 10
+  projection_dims: [512, 256, 128]
+
+training:
+  optimizer: "adamw"
+  lr_lora: 2.0e-4
+  lr_head: 1.0e-3
+  weight_decay: 0.01
+  beta1: 0.9
+  beta2: 0.999
+  batch_size: 256
+  n_epochs: 50
+  early_stopping_patience: 10
+  info_reg_lambda: 0.1
+  recon_weight: 0.1
+  scheduler: "cosine"
+  lr_min_lora: 1.0e-6
+  lr_min_head: 1.0e-5
+  gradient_clip: 1.0
+
+resolve:
+  n_components: 3  # eccrine, hair, uncommitted
+  n_warmup: 2000
+  n_samples: 4000
+  n_chains: 4
+  horseshoe_s0_ratio: 0.01  # expected sparsity
+  horseshoe_method: "fast"  # "fast" (BayesianRidge), "mcmc" (reduced NUTS), or "full" (full NUTS)
+
+trace:
+  n_dpt_neighbors: 30
+  n_diffusion_components: 15
+  gam_n_splines: 5
+  branch_fdr: 0.05
+
+experiment:
+  seed: 42
+  device: "cuda:0"
+  n_permutations: 1000
+  n_bootstrap: 1000
+  checkpoint_dir: "checkpoints"
+  figure_dir: "figures"

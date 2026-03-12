@@ -1,0 +1,92 @@
+# Intestinal stem cell system configuration
+# Intestinal stem cell fate decision: absorptive vs secretory lineage
+# GSE92332: Haber et al. 2017 - Mouse intestinal epithelial scRNA-seq
+# Notch signaling drives absorptive vs secretory fate choice
+
+system:
+  name: "intestine"
+  condition_key: "batch"
+  conditions:
+    B1: 0
+    B2: 1
+    B3: 2
+    B4: 3
+    B5: 4
+    B6: 5
+    B7: 6
+    B8: 7
+    B9: 8
+    B10: 9
+  fate_names:
+    - "uncommitted"
+    - "absorptive"
+    - "secretory"
+  known_fate_threshold: 2
+  forced_genes:
+    - "Atoh1"
+    - "Hes1"
+    - "Dll1"
+    - "Spdef"
+    - "Lgr5"
+    - "Alpi"
+    - "Muc2"
+  known_markers:
+    absorptive:
+      - "Hes1"
+      - "Alpi"
+      - "Fabp1"
+      - "Vil1"
+      - "Sis"
+    secretory:
+      - "Atoh1"
+      - "Dll1"
+      - "Spdef"
+      - "Muc2"
+      - "Chga"
+  sample_condition_map: {}
+  root_cluster: "stem"
+  cluster_key: "cluster"
+  geo_accession: "GSE92332"
+  download_function: "prism.data.download_intestine.download_intestine"
+  label_strategy: "flat"
+  fate_categories:
+    - "non_epithelial"
+    - "undetermined"
+    - "absorptive"
+    - "secretory"
+  marker_scores:
+    stem:
+      - "Lgr5"
+      - "Ascl2"
+      - "Olfm4"
+    ta:
+      - "Mki67"
+      - "Top2a"
+      - "Pcna"
+    absorptive:
+      - "Hes1"
+      - "Alpi"
+      - "Fabp1"
+      - "Vil1"
+    secretory:
+      - "Atoh1"
+      - "Dll1"
+      - "Spdef"
+      - "Muc2"
+    goblet:
+      - "Muc2"
+      - "Tff3"
+      - "Fcgbp"
+    enteroendocrine:
+      - "Chga"
+      - "Chgb"
+      - "Neurod1"
+    paneth:
+      - "Lyz1"
+      - "Defa5"
+  branch_names:
+    branch_a: "absorptive_branch"
+    branch_b: "secretory_branch"
+  condition_branch_map:
+    B1: "absorptive_branch"
+    B7: "secretory_branch"
